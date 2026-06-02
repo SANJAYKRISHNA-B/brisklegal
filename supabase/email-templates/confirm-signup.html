@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confirm your BriskLegal account</title>
+  </head>
+  <body style="margin:0;background:#07111f;font-family:Manrope,Arial,sans-serif;color:#111827;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#07111f;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fffdf8;border:1px solid #c8a45d;">
+            <tr>
+              <td style="padding:34px 34px 18px;">
+                <div style="display:inline-block;background:#07111f;color:#c8a45d;font-size:34px;font-weight:900;letter-spacing:-2px;line-height:1;padding:14px 16px;">B</div>
+                <h1 style="margin:22px 0 10px;color:#07111f;font-size:34px;line-height:1.1;font-weight:900;">Confirm your BriskLegal account</h1>
+                <p style="margin:0;color:#5f6673;font-size:16px;line-height:1.65;">
+                  Your secure advisory workspace fix tis ready. Confirm this email address to activate access to consultation requests, matter updates, and document support.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 34px 28px;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#c8a45d;color:#07111f;font-size:16px;font-weight:900;text-decoration:none;padding:15px 24px;">
+                  Confirm Email
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 34px 34px;">
+                <p style="margin:0 0 12px;color:#5f6673;font-size:13px;line-height:1.6;">
+                  If the button does not work, copy and paste this secure confirmation link into your browser:
+                </p>
+                <p style="margin:0;color:#07111f;font-size:12px;line-height:1.6;word-break:break-all;">{{ .ConfirmationURL }}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#101826;padding:20px 34px;">
+                <p style="margin:0;color:#e7dfce;font-size:12px;line-height:1.6;">
+                  BriskLegal | Integrated Legal, Regulatory, and Business Advisory
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
