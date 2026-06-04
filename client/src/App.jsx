@@ -421,11 +421,11 @@ function getFriendlyAuthError(message, isSignup) {
   const normalized = String(message || "").toLowerCase();
 
   if (normalized.includes("unable to exchange external code")) {
-    return "SSO callback failed. Check the provider client secret, redirect URI, and Supabase provider settings.";
+    return "Connection failed. Please try again.";
   }
 
   if (normalized.includes("unsupported provider") || normalized.includes("provider is not enabled")) {
-    return "This SSO provider is not enabled in Supabase yet. Enable and configure it under Authentication > Providers.";
+    return "Connection failed. Please try again.";
   }
 
   if (normalized.includes("invalid login credentials")) {
@@ -450,7 +450,7 @@ function getFriendlyAuthError(message, isSignup) {
     return "Too many attempts. Please wait a moment and try again.";
   }
 
-  return "We could not complete this request. Please check the details and try again.";
+  return "Connection failed. Please try again.";
 }
 
 function ScrollEffects() {
@@ -1610,7 +1610,8 @@ function AuthPage({ mode }) {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/`
+        redirectTo: `${window.location.origin}/signin`,
+        ...(provider === "azure" ? { scopes: "email" } : {})
       }
     });
 
@@ -1874,18 +1875,16 @@ function AuthPage({ mode }) {
             aria-labelledby="sso-modal-title"
           >
             <Logo />
-            <div className={`sso-loader ${ssoModal.state}`}>
-              {ssoModal.state === "loading" ? (
+            {ssoModal.state === "loading" && (
+              <div className="sso-loader loading">
                 <span className="sso-spinner" aria-hidden="true" />
-              ) : (
-                <span className="sso-error-mark" aria-hidden="true">!</span>
-              )}
-            </div>
+              </div>
+            )}
             <p className="auth-kicker">Secure SSO</p>
             <h2 id="sso-modal-title">
-              {ssoModal.state === "loading" ? `Connecting ${ssoModal.provider}` : "SSO needs setup"}
+              {ssoModal.state === "loading" ? `Connecting ${ssoModal.provider}` : "Connection failed"}
             </h2>
-            <p>{ssoModal.message}</p>
+            {ssoModal.state === "loading" && <p>{ssoModal.message}</p>}
             {ssoModal.state === "error" && (
               <div className="auth-modal-actions">
                 <button
@@ -1925,6 +1924,7 @@ function OAuthCallbackNotice() {
 
     const decodedError = decodeURIComponent(rawError);
     setOauthError(getFriendlyAuthError(decodedError, false));
+    window.history.replaceState(null, "", "/signin");
   }, [location.hash, location.search]);
 
   if (!oauthError) {
@@ -1940,12 +1940,8 @@ function OAuthCallbackNotice() {
         aria-labelledby="oauth-error-title"
       >
         <Logo />
-        <div className="sso-loader error">
-          <span className="sso-error-mark" aria-hidden="true">!</span>
-        </div>
         <p className="auth-kicker">SSO callback</p>
         <h2 id="oauth-error-title">Connection failed</h2>
-        <p>{oauthError}</p>
         <div className="auth-modal-actions">
           <button type="button" onClick={() => navigate("/signin", { replace: true })}>
             Back to Sign In

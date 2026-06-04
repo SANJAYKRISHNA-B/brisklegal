@@ -2740,11 +2740,19 @@ p {
 }
 
 .sso-modal {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  padding: clamp(28px, 4vw, 42px);
   text-align: center;
 }
 
 .sso-modal .logo {
+  display: flex;
   justify-content: center;
+  margin: 0 0 20px;
+  width: 100%;
 }
 
 .sso-loader {
@@ -2752,11 +2760,25 @@ p {
   background: rgba(7, 17, 31, 0.06);
   border: 1px solid rgba(200, 164, 93, 0.28);
   border-radius: 50%;
-  display: inline-flex;
+  display: flex;
+  flex: 0 0 auto;
   height: 74px;
   justify-content: center;
-  margin: 0 auto 18px;
+  margin: 0 auto 20px;
   width: 74px;
+}
+
+.sso-modal .auth-kicker {
+  margin: 0 0 10px;
+}
+
+.sso-modal h2 {
+  margin-bottom: 12px;
+  max-width: 100%;
+}
+
+.sso-modal p:not(.auth-kicker) {
+  max-width: 390px;
 }
 
 .sso-spinner {
