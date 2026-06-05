@@ -2278,6 +2278,44 @@ p {
   padding: clamp(38px, 4.2vw, 62px);
 }
 
+.signin-page .auth-shell {
+  animation: signinCardReveal 760ms cubic-bezier(0.19, 1, 0.22, 1) 1300ms both;
+  grid-template-columns: minmax(320px, 560px);
+  min-height: auto;
+  width: min(600px, calc(100% - 48px));
+}
+
+.signin-page .auth-panel {
+  align-items: center;
+  justify-content: center;
+  min-height: min(680px, calc(100svh - 132px));
+  text-align: center;
+}
+
+.signin-page .auth-panel .logo {
+  justify-content: center;
+}
+
+.signin-page .auth-panel > p:not(.auth-kicker):not(.auth-switch),
+.signin-page .auth-form,
+.signin-page .auth-alert,
+.signin-page .auth-divider,
+.signin-page .auth-socials {
+  width: min(420px, 100%);
+}
+
+.signin-page .auth-form {
+  text-align: left;
+}
+
+.signin-page .auth-options {
+  width: 100%;
+}
+
+.signin-page .auth-visual {
+  display: none;
+}
+
 .auth-panel::-webkit-scrollbar {
   width: 8px;
 }
@@ -3553,6 +3591,18 @@ p {
   }
 }
 
+@keyframes signinCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes splashLogoPulse {
   0%,
   100% {
@@ -4145,5 +4195,125 @@ p {
   .feature-panel,
   .client-card {
     padding: 22px;
+  }
+}
+
+.signin-page {
+  height: calc(100svh - 76px);
+  min-height: calc(100svh - 76px);
+  overflow: hidden;
+  padding: 0;
+}
+
+.signin-page .auth-shell {
+  animation: signinCardReveal 760ms cubic-bezier(0.19, 1, 0.22, 1) 1300ms both;
+  grid-template-columns: minmax(300px, 520px);
+  max-height: calc(100svh - 104px);
+  min-height: 0;
+  width: min(540px, calc(100% - 32px));
+}
+
+.signin-page .auth-panel {
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(22px, 3.4vw, 38px);
+  text-align: center;
+}
+
+.signin-page .auth-panel .logo {
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.signin-page .auth-panel h1 {
+  font-size: clamp(31px, 3.2vw, 42px);
+  margin-bottom: 10px;
+}
+
+.signin-page .auth-panel > p:not(.auth-kicker):not(.auth-switch) {
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.signin-page .auth-form {
+  gap: 10px;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.signin-page .auth-form input {
+  min-height: 44px;
+}
+
+.signin-page .auth-form > button {
+  min-height: 46px;
+}
+
+.signin-page .auth-divider {
+  margin: 12px 0 10px;
+}
+
+.signin-page .auth-socials {
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(88px, 124px));
+  justify-content: center;
+  justify-items: stretch;
+  margin-inline: auto;
+  width: fit-content;
+}
+
+.signin-page .auth-socials button {
+  min-height: 44px;
+  width: 124px;
+}
+
+.signin-page .auth-alert {
+  margin-bottom: 10px;
+  max-height: 78px;
+  padding: 9px 11px;
+}
+
+.signin-page .auth-visual,
+.signin-page .auth-switch {
+  display: none;
+}
+
+@media (max-height: 720px) {
+  .signin-page .auth-panel {
+    padding: 18px;
+  }
+
+  .signin-page .auth-panel .logo {
+    margin-bottom: 8px;
+  }
+
+  .signin-page .auth-kicker {
+    margin-bottom: 4px;
+  }
+
+  .signin-page .auth-panel h1 {
+    font-size: 30px;
+    margin-bottom: 6px;
+  }
+
+  .signin-page .auth-panel > p:not(.auth-kicker):not(.auth-switch) {
+    display: none;
+  }
+
+  .signin-page .auth-form {
+    gap: 8px;
+  }
+
+  .signin-page .auth-form input,
+  .signin-page .auth-form > button,
+  .signin-page .auth-socials button {
+    min-height: 40px;
+  }
+
+  .signin-page .auth-divider {
+    margin: 8px 0;
   }
 }

@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { isSupabaseConfigured, supabase } from "./supabaseClient";
 
@@ -13,8 +13,7 @@ const navItems = [
 ];
 
 const authNavItems = [
-  { label: "Sign In", path: "/signin" },
-  { label: "Sign Up", path: "/signup" }
+  { label: "Sign In", path: "/signin" }
 ];
 
 const missionParagraphs = [
@@ -319,7 +318,6 @@ const emptyAuthForm = {
 
 const oauthProviders = [
   { label: "Google", icon: "google", provider: "google" },
-  { label: "LinkedIn", icon: "linkedin", provider: "linkedin_oidc" },
   { label: "Microsoft", icon: "microsoft", provider: "azure" }
 ];
 
@@ -618,7 +616,7 @@ function Header() {
             {authNavItems.map((item) => (
               <NavLink
                 key={item.path}
-                className={item.path === "/signup" ? "nav-auth-button primary" : "nav-auth-button"}
+                className="nav-auth-button primary"
                 to={item.path}
                 onClick={() => setOpen(false)}
               >
@@ -1816,12 +1814,11 @@ function AuthPage({ mode }) {
             ))}
           </div>
 
-          <p className="auth-switch">
-            {isSignup ? "Already registered?" : "Not registered yet?"}{" "}
-            <NavLink to={isSignup ? "/signin" : "/signup"}>
-              {isSignup ? "Sign in" : "Create an account"}
-            </NavLink>
-          </p>
+          {isSignup && (
+            <p className="auth-switch">
+              Already registered? <NavLink to="/signin">Sign in</NavLink>
+            </p>
+          )}
         </div>
 
         <div className="auth-visual" aria-hidden="true">
@@ -2018,7 +2015,7 @@ export default function App() {
           <Route path="/clients" element={<Clients />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signin" element={<AuthPage mode="signin" />} />
-          <Route path="/signup" element={<AuthPage mode="signup" />} />
+          <Route path="/signup" element={<Navigate to="/signin" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
